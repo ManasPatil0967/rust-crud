@@ -165,11 +165,11 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| {
         let cors = Cors::default()
-            .allowed_origin("http://localhost:8080")
+            .allowed_origin("http://localhost:3000")
             .allowed_methods(vec!["GET", "POST"])
             .allowed_headers(vec![actix_web::http::header::AUTHORIZATION, actix_web::http::header::ACCEPT])
             .allowed_header(actix_web::http::header::CONTENT_TYPE)
-            .max_age(3600);
+            .max_age(None);
         App::new()
             .wrap(cors)
             .service(add_user)
@@ -179,8 +179,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_restaurants)
             .service(get_reviews)
     })
-    .bind("127:0.0.1:8000")?
-        .run()
-        .await
+    .bind("127.0.0.1:5000")?
+    .run().await
 }
 

@@ -15,5 +15,5 @@ Cargo.lock
 
 
 # Added by cargo
-
+/tsclient/node_modules
 /target

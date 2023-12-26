@@ -1,9 +1,5 @@
 mod model;
-mod api;
 use yew::prelude::*;
-//The
-
-const MONGO_URL: &str = "http://localhost:8000";
 
 #[function_component]
 fn App() -> Html {
