@@ -15,14 +15,12 @@ const REVIEW_COLLECTION: &str = "review";
 #[post("/add_user")]
 async fn add_user(user: web::Json<User>) -> HttpResponse{
     let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     let db = client.database(DATABASE_NAME);
     let collection = db.collection(USER_COLLECTION);
     let result = collection.insert_one(user.into_inner(), None).await.unwrap();
@@ -32,14 +30,12 @@ async fn add_user(user: web::Json<User>) -> HttpResponse{
 #[post("/add_restaurant")]
 async fn add_restaurant(restaurant: web::Json<Restaurant>) -> HttpResponse {
     let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     let db = client.database(DATABASE_NAME);
     let collection = db.collection(RESTAURANT_COLLECTION);
     let result = collection.insert_one(restaurant.into_inner(), None).await.unwrap();
@@ -49,14 +45,12 @@ async fn add_restaurant(restaurant: web::Json<Restaurant>) -> HttpResponse {
 #[post("/add_review")]
 async fn add_review(review: web::Json<Review>) -> HttpResponse {
     let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     let db = client.database(DATABASE_NAME);
     let collection = db.collection(REVIEW_COLLECTION);
     let result = collection.insert_one(review.into_inner(), None).await.unwrap();
@@ -65,15 +59,13 @@ async fn add_review(review: web::Json<Review>) -> HttpResponse {
 
 #[get("/get_users/{username}")]
 async fn get_users(username: web::Path<String>) -> HttpResponse {
-       let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+    let mut client_options =
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     let db = client.database(DATABASE_NAME);
     let collection = db.collection(USER_COLLECTION);
     let username = username.into_inner();
@@ -90,15 +82,13 @@ async fn get_users(username: web::Path<String>) -> HttpResponse {
 
 #[get("/get_restaurants/{name}")]
 async fn get_restaurants(name: web::Path<String>) -> HttpResponse {
-       let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+    let mut client_options =
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     let db = client.database(DATABASE_NAME);
     let collection = db.collection(RESTAURANT_COLLECTION);
     let name = name.into_inner();
@@ -115,15 +105,13 @@ async fn get_restaurants(name: web::Path<String>) -> HttpResponse {
 
 #[get("/get_reviews/{restaurant}&{username}")]
 async fn get_reviews(info: web::Path<(String, String)>) -> HttpResponse {
-       let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+    let mut client_options =
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     let db = client.database(DATABASE_NAME);
     let collection = db.collection(REVIEW_COLLECTION);
     let (restaurant, username) = info.into_inner();
@@ -158,24 +146,22 @@ async fn create_review_index(client: &Client) {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-       let mut client_options =
-    ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
+    let mut client_options =
+        ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
 
-  // Set the server_api field of the client_options object to Stable API version 1
-  let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-  client_options.server_api = Some(server_api);
+    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
+    client_options.server_api = Some(server_api);
 
-  // Get a handle to the cluster
-  let client = Client::with_options(client_options).unwrap();
+    let client = Client::with_options(client_options).unwrap();
     create_user_index(&client).await;
     create_restaurant_index(&client).await;
     create_review_index(&client).await;
 
     client
-    .database("rustcrud")
-    .run_command(doc! {"ping": 1}, None)
-    .await.expect("Failed to ping database.");
-  println!("Pinged your deployment. You successfully connected to MongoDB!");
+        .database("rustcrud")
+        .run_command(doc! {"ping": 1}, None)
+        .await.expect("Failed to ping database.");
+    println!("Pinged your deployment. You successfully connected to MongoDB!");
 
     HttpServer::new(|| {
         let cors = Cors::default()
@@ -194,7 +180,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_reviews)
     })
     .bind("127:0.0.1:8000")?
-    .run()
-    .await
+        .run()
+        .await
 }
 
