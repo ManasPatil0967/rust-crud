@@ -1,23 +1,18 @@
 import { addReview } from "@/util"
 import { useState } from "react"
-import { useRouter } from "next/router"
-import { Review } from "@/model"
 
 export default function Component (){
     const [user, setUser] = useState('');
     const [restaurant, setRestaurant] = useState('');
     const [rating, setRating] = useState('');
     const [comment, setComment] = useState('');
-    const router = useRouter()
 
     const handleSubmit = async (e:any) => {
         e.preventDefault();
         const review = { restaurant, user, rating, comment };
         const res = await addReview({ ...review});
-        const json = await res.json()
-        if (!res.ok) throw Error(json.message)
+        console.log(res);
         console.log('Review created!')
-        router.push('/reviews')
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">

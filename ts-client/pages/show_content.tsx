@@ -18,18 +18,14 @@ export default function Component () {
 
     const getRestaurantFromName = async (name: string) => {
         const res = await getRestaurants(name);
-        const json = await res.json();
-        if (!res.ok) throw Error(json.message);
-        const restaurant: Restaurant = json.data;
+        const restaurant: Restaurant = res;
         setRestaurant(restaurant);
         return restaurant;
     }
 
-    const getReviewFromReview = async (reviewName: string) => {
+    const getReviewFromReview = async (username: string, restaurantName: string) => {
         const res = await getReviews(username, restaurantName);
-        const json = await res.json();
-        if (!res.ok) throw Error(json.message);
-        const review: Review = json.data;
+        const review: Review = res;
         setReview(review);
         return review;
     }
@@ -38,7 +34,7 @@ export default function Component () {
         e.preventDefault();
         const user = await getUserFromUsername(username);
         const restaurant = await getRestaurantFromName(restaurantName);
-        const review = await getReviewFromReview(username);
+        const review = await getReviewFromReview(username, restaurantName);
         console.log(user);
         console.log(restaurant);
         console.log(review);
@@ -64,7 +60,7 @@ export default function Component () {
             restaurant?.name ?? ''
         }</p>
         <p>{
-            review?.comment ?? ''
+            review?.restaurant ?? ''
         }</p>
         </div>
     )

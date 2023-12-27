@@ -4,7 +4,7 @@ use mongodb::bson;
 use mongodb::bson::doc;
 use mongodb::{ Client, options::IndexOptions, IndexModel, options::ServerApi, options::ServerApiVersion, options::ClientOptions};
 use actix_cors::Cors;
-use model::{User, Restaurant, Review};
+use model::{User, Restaurant, Review, default, default_user, default_restaurant};
 
 //const MONGO_URL: &str = "mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority";
 const DATABASE_NAME: &str = "rustcrud";
@@ -75,7 +75,7 @@ async fn get_users(username: web::Path<String>) -> HttpResponse {
             HttpResponse::Ok().json(user)
         }
         None => {
-            HttpResponse::Ok().body("No user found")
+            HttpResponse::Ok().json(default_user())
         }
     }
 }
@@ -98,12 +98,12 @@ async fn get_restaurants(name: web::Path<String>) -> HttpResponse {
             HttpResponse::Ok().json(restaurant)
         }
         None => {
-            HttpResponse::Ok().body("No restaurant found")
+            HttpResponse::Ok().json(default_restaurant())
         }
     }
 }
 
-#[get("/get_reviews/{restaurant}&{username}")]
+#[get("/get_reviews/{restaurant}/{username}")]
 async fn get_reviews(info: web::Path<(String, String)>) -> HttpResponse {
     let mut client_options =
         ClientOptions::parse("mongodb+srv://manaspatil:Manas2003@rustcrud.o7kvyly.mongodb.net/?retryWrites=true&w=majority").await.unwrap();
@@ -121,7 +121,7 @@ async fn get_reviews(info: web::Path<(String, String)>) -> HttpResponse {
             HttpResponse::Ok().json(review)
         }
         None => {
-            HttpResponse::Ok().body("No review found")
+            HttpResponse::Ok().json(default())
         }
     }
 }

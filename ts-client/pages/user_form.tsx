@@ -11,9 +11,8 @@ export default function Component (){
         e.preventDefault();
         const user = { username, password, restaurants };
         const res = await addUser({ ...user, restaurants: [restaurants] });
-        const json = await res.json()
-        if (!res.ok) throw Error(json.message)
         console.log('User created!')
+        console.log(res);
     }
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">

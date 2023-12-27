@@ -14,13 +14,12 @@ export default function Component () {
         e.preventDefault();
         const restaurant = { name, address, email, description, rating, price };
         const res = await addRestaurant({ ...restaurant});
-        const json = await res.json()
-        if (!res.ok) throw Error(json.message)
-        console.log('Restaurant created!')
+        console.log(res);
+        console.log('Restaurant created!');
     }
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <div className="flex flex-col items-center bg-white text-black justify-center min-h-screen py-2">
         <form onSubmit={handleSubmit}>
             <label>
                 Name:

@@ -13,7 +13,7 @@ async function apiRequest<T>(url: string, method: string, body?: T) {
       throw new Error(`API request failed with status ${response.status}`);
     }
   
-    return response.json();
+    return response.text().then((text) => (text ? JSON.parse(text) : {}));
   }
 
   export function addUser(user: User) {
@@ -36,6 +36,13 @@ async function apiRequest<T>(url: string, method: string, body?: T) {
     return apiRequest<Restaurant>(`http://127.0.0.1:5000/get_restaurants/${name}`, 'GET');
   }
   
-  export function getReviews(restaurant: string, username: string) {
-    return apiRequest<Review>(`http://127.0.0.1:5000/get_reviews/${restaurant}&${username}`, 'GET');
+  export async function getReviews(restaurant: string, username: string) {
+    const url = `http://127.0.0.1:5000/get_reviews/${restaurant}/${username}`;
+    const response = fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        });
+    return response.then((res) => res.json());
   }

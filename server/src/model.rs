@@ -24,3 +24,31 @@ pub struct Review {
     rating: String,
     comment: String,
 }
+
+pub fn default() -> Review {
+    Review {
+        restaurant: String::from("No review found"),
+        user: String::from(""),
+        rating: String::from(""),
+        comment: String::from(""),
+    }
+}
+
+pub fn default_user() -> User {
+    User {
+        username: String::from("No user found"),
+        password: String::from(""),
+        restaurants: Vec::new(),
+    }
+}
+
+pub fn default_restaurant() -> Restaurant {
+    Restaurant {
+        name: String::from("No restaurant found"),
+        address: String::from(""),
+        email: String::from(""),
+        description: String::from(""),
+        rating: String::from(""),
+        price: String::from(""),
+    }
+}
